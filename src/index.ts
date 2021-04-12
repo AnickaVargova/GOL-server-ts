@@ -8,7 +8,8 @@ import beacon from "./settings/beacon";
 import pentadecathlon from "./settings/pentadecathlon";
 import pulsar from "./settings/pulsar";
 import random from "./settings/random";
-import * as newPatterns from "./responseUpdate";
+import * as newPatterns from "../responseUpdate";
+import { buildTsGameOfLifePattern } from "./utils";
 
 const app = express();
 
@@ -41,17 +42,16 @@ app.get(`/:setting`, (req, res) => {
 
 app.get("/", (req, res) => res.send(Object.keys(newResponse)));
 
-app.post("/:setting", async (req, res) => {
-  let newPattern = await req.body;
+app.post("/:setting", (req, res) => {
+  const newPattern = req.body;
+  const patternName = req.params.setting;
   // @ts-expect-error
-  newResponse[newPattern[0]] = newPattern[1];
-  fs.appendFile(`responseUpdate.ts`, `export const ${newPattern[0]} =`, () => {
-    fs.appendFile(`responseUpdate.ts`, JSON.stringify(newPattern[1]), () => {
-      fs.appendFile(`responseUpdate.ts`, ";", () => {
-        console.log("success!");
-      });
-    });
-  });
+  newResponse[patternName] = newPattern;
+
+  fs.appendFileSync(
+    `responseUpdate.ts`,
+    buildTsGameOfLifePattern(patternName, newPattern)
+  );
 });
 
 app.listen(8080);
