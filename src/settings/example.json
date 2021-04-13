@@ -1,4 +1,4 @@
-const data = [
+[
   [
     false,
     false,
@@ -19,7 +19,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -41,7 +41,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -63,7 +63,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -85,7 +85,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -107,7 +107,7 @@ const data = [
     true,
     false,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -129,7 +129,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -151,7 +151,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -173,7 +173,7 @@ const data = [
     false,
     false,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -195,7 +195,7 @@ const data = [
     true,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -217,7 +217,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -239,7 +239,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -261,7 +261,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -283,7 +283,7 @@ const data = [
     true,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -305,7 +305,7 @@ const data = [
     true,
     false,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -327,7 +327,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -349,7 +349,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -371,7 +371,7 @@ const data = [
     false,
     false,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -393,7 +393,7 @@ const data = [
     false,
     true,
     false,
-    true,
+    true
   ],
   [
     true,
@@ -415,7 +415,7 @@ const data = [
     true,
     true,
     false,
-    true,
+    true
   ],
   [
     false,
@@ -437,8 +437,8 @@ const data = [
     false,
     true,
     false,
-    true,
-  ],
-];
+    true
+  ]
+]
 
-export default data;
+

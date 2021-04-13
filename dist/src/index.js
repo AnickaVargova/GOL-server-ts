@@ -36,38 +36,41 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var fs_1 = __importDefault(require("fs"));
-var blinker_1 = __importDefault(require("./settings/blinker"));
-var example_1 = __importDefault(require("./settings/example"));
-var toad_1 = __importDefault(require("./settings/toad"));
-var beacon_1 = __importDefault(require("./settings/beacon"));
-var pentadecathlon_1 = __importDefault(require("./settings/pentadecathlon"));
-var pulsar_1 = __importDefault(require("./settings/pulsar"));
+// import blinker from "./settings/blinker";
+// import example from "./settings/example";
+// import toad from "./settings/toad";
+// import beacon from "./settings/beacon";
+// import pentadecathlon from "./settings/pentadecathlon";
+// import pulsar from "./settings/pulsar";
 var random_1 = __importDefault(require("./settings/random"));
 var newPatterns = __importStar(require("../responseUpdate"));
 var utils_1 = require("./utils");
+var path_1 = __importDefault(require("path"));
 var app = express_1.default();
 app.use(express_1.default.json());
 app.use(cors_1.default());
 var response = {
-    example: example_1.default,
-    blinker: blinker_1.default,
-    toad: toad_1.default,
-    beacon: beacon_1.default,
-    pentadecathlon: pentadecathlon_1.default,
-    pulsar: pulsar_1.default,
+    // example,
+    // blinker,
+    // toad,
+    // beacon,
+    // pentadecathlon,
+    // pulsar,
     random: random_1.default(),
 };
 var newResponse = __assign(__assign({}, response), newPatterns);
 app.get("/random", function (req, res) { return res.send(random_1.default()); });
 app.get("/:setting", function (req, res) {
-    //@ts-expect-error
-    if (newResponse[req.params.setting]) {
-        //@ts-expect-error
-        res.send(newResponse[req.params.setting]);
-    }
-    else {
-        res.send("");
-    }
+    var patternName = req.params.setting;
+    var loadedData = fs_1.default.readFileSync(path_1.default.join(__dirname, "./settings/" + patternName + ".json"));
+    res.send(loadedData);
+    // //@ts-expect-error
+    // if (newResponse[req.params.setting]) {
+    //   //@ts-expect-error
+    //   res.send(newResponse[req.params.setting]);
+    // } else {
+    //   res.send("");
+    // }
 });
 app.get("/", function (req, res) { return res.send(Object.keys(newResponse)); });
 app.post("/:setting", function (req, res) {
