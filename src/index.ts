@@ -12,11 +12,16 @@ app.use(cors());
 app.get("/random", (req, res) => res.send(random()));
 
 app.get(`/:setting`, (req, res) => {
-  //validace -existuje?
   const patternName = req.params.setting;
-  const loadedData = fs.readFileSync(
-    path.join(__dirname, `./settings/${patternName}.json`)
-  );
+  const patternPath = path.join(__dirname, `./settings/${patternName}.json`);
+
+  fs.access(patternPath, fs.constants.R_OK, (err) => {
+    if (err) {
+      console.error("File not found");
+      return;
+    }
+  });
+  const loadedData = fs.readFileSync(patternPath);
 
   res.send(loadedData);
 });
