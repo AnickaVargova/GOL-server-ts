@@ -15,25 +15,47 @@ app.get(`/:setting`, (req, res) => {
   const patternName = req.params.setting;
   const patternPath = path.join(__dirname, `./settings/${patternName}.json`);
 
-  fs.access(patternPath, fs.constants.R_OK, (err) => {
-    if (err) {
-      console.error("File not found");
-      return;
-    }
-  });
-  const loadedData = fs.readFileSync(patternPath);
+  let fileExists = fs.existsSync(patternPath);
 
-  res.send(loadedData);
+  if (fileExists) {
+    const loadedData = fs.readFileSync(patternPath);
+    res.send(loadedData);
+  } else {
+    res.status(400).send();
+    return;
+  }
+});
+
+app.get("/", (req, res) => {
+  const fileNames = fs
+    .readdirSync(path.join(__dirname, `./settings`))
+    .map((name) => name.slice(0, -5));
+  res.send(fileNames);
 });
 
 app.post("/:setting", (req, res) => {
   const newPattern = req.body;
   const patternName = req.params.setting;
+  const patternPath = path.join(__dirname, `./settings/${patternName}.json`);
 
-  fs.writeFileSync(
-    path.join(__dirname, `./settings/${patternName}.json`),
-    JSON.stringify(newPattern)
-  );
+  let fileExists = fs.existsSync(patternPath);
+  if (fileExists) {
+    return res.status(400).send({
+      error: "Pattern name already exists",
+    });
+  }
+
+  fs.writeFileSync(patternPath, JSON.stringify(newPattern));
+  res.send(newPattern);
+});
+
+app.put("/:setting", (req, res) => {
+  const pattern = req.body;
+  const patternName = req.params.setting;
+  const patternPath = path.join(__dirname, `./settings/${patternName}.json`);
+
+  fs.writeFileSync(patternPath, JSON.stringify(pattern));
+  res.send(pattern);
 });
 
 app.listen(8080);
