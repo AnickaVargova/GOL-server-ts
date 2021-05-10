@@ -37,7 +37,9 @@ app.post("/:setting", function (req, res) {
     var patternPath = path_1.default.join(__dirname, "./settings/" + patternName + ".json");
     var fileExists = fs_1.default.existsSync(patternPath);
     if (fileExists) {
-        return res.status(400).send({ error: "Pattern name already exists." });
+        return res.status(400).send({
+            error: "Pattern name already exists",
+        });
     }
     fs_1.default.writeFileSync(patternPath, JSON.stringify(newPattern));
     res.send(newPattern);

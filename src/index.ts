@@ -58,4 +58,7 @@ app.put("/:setting", (req, res) => {
   res.send(pattern);
 });
 
+// TODO: missing functionality for deleting pattern and random
+
+
 app.listen(8080);
